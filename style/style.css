@@ -124,7 +124,7 @@ button.nav-menu {
 }
 .dropdown-menu{
     position: absolute;
-    top: 1.4rem;
+    top: 2.75rem;
     z-index: 10000;
     min-width: 200px;
     background-color:#fff;
@@ -182,7 +182,9 @@ button.nav-menu {
     padding: 3rem 0 2rem 3rem;
 }
 
-.template-menu {width: 75%;height: 100px;}
+.template-menu {
+    width: 75%
+}
 
 .template-img {
     width: 25%;
@@ -218,7 +220,7 @@ h6.text-uppercase {
 }
 .template-img img {
     width: 100%;
-    object-fit: fill;
+    object-fit: cover;
 }
 
 p.services-content-paragraph {

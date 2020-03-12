@@ -12,6 +12,9 @@ $(document).ready(function () {
     });
     $(".nav-item-template").click(function (e) { 
         hidden_visible(".template-dropdown");
+        if((".nav-item-home").hasClass("v-visible")){
+            $(".nav-item-home").removeClass("v-visible");
+        }
     });
     function hidden_visible(nameClass){
         if($(nameClass).hasClass("v-visible")){
@@ -22,4 +25,8 @@ $(document).ready(function () {
             $(nameClass).removeClass("v-hidden");
         }
     }
+    // const heightMenu = $(".template-menu-header").innerHeight()+$(".template-menu-footer").innerHeight();
+    const heightMenu = $(".template-menu").innerHeight();
+    $(".template-img img").height(heightMenu);
+
 });
