@@ -1,32 +1,55 @@
 $(document).ready(function () {
-    $(".nav-menu").click(function (e) { 
-        e.preventDefault();       
-        if($(".navbar-collapse").hasClass("d-none")){
+    // -------------navbar
+    $(".nav-menu").click(function (e) {
+        e.preventDefault();
+        if ($(".navbar-collapse").hasClass("d-none")) {
             $(".navbar-collapse").removeClass("d-none");
-        }else{
+        } else {
             $(".navbar-collapse").addClass("d-none");
         }
     });
-    $(".nav-item-home").click(function (e) { 
-        hidden_visible(".home-dropdown");
+    $(".nav-item-home").click(function (e) {
+        hidden_visible(".home-dropdown", [".template-dropdown", ".docs-dropdown"]);
     });
-    $(".nav-item-template").click(function (e) { 
-        hidden_visible(".template-dropdown");
-        if((".nav-item-home").hasClass("v-visible")){
-            $(".nav-item-home").removeClass("v-visible");
-        }
+    $(".nav-item-template").click(function (e) {
+        hidden_visible(".template-dropdown", [".home-dropdown", ".docs-dropdown"]);
     });
-    function hidden_visible(nameClass){
-        if($(nameClass).hasClass("v-visible")){
-            $(nameClass).removeClass("v-visible");
-            $(nameClass).addClass("v-hidden");
-        }else{
-            $(nameClass).addClass("v-visible");
-            $(nameClass).removeClass("v-hidden");
-        }
-    }
-    // const heightMenu = $(".template-menu-header").innerHeight()+$(".template-menu-footer").innerHeight();
-    const heightMenu = $(".template-menu").innerHeight();
-    $(".template-img img").height(heightMenu);
+    $(".nav-item-docs").click(function (e) {
+        hidden_visible(".docs-dropdown", [".home-dropdown", ".template-dropdown"]);
+    });
 
+
+    $.fn.slideDropdownUp = function () {
+        $(this).fadeIn(600).css('transform', 'translateY(0)');
+        return this;
+    };
+    $.fn.slideDropdownDown = function () {
+        $(this).fadeOut(600).css('transform', 'translateY(50px)');
+    };
+
+    function hidden_visible(nameClass, [...nameClass1]) {
+        if ($(nameClass).hasClass("v-visible")) {
+            $(nameClass).removeClass("v-visible");
+            $(nameClass).slideDropdownDown()
+        } else {
+            $(nameClass).addClass("v-visible");
+            $(nameClass).slideDropdownUp()
+        }
+        nameClass1.forEach(name => {
+            if ($(name).hasClass("v-visible")) {
+                $(name).removeClass("v-visible");
+                $(name).slideDropdownDown()
+            }
+        })
+    }
+    // ------------------Header
+    function setHeightHeader() {
+        const heightWindow = $(window).height();
+        $(".header").height(heightWindow-20);
+    }
+    setHeightHeader();
+    $(window).bind('resize', function (e) {
+        setHeightHeader();
+    });
+    
 });
